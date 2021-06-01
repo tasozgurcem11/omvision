@@ -16,15 +16,15 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.callbacks import ModelCheckpoint
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-ckpt = "C:\Users\ilkay\Documents\Cem-Berkan\checkpoint"
-checkpoint_path = 'C:\Users\ilkay\Documents\Cem-Berkan\checkpoint'
-model_dir = "C:\Users\ilkay\Documents\Cem-Berkan\models\{date}.h5" 
-image_dir = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_train"
-path = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_test"
-data_path = '"C:\Users\ilkay\Documents\Cem-Berkan\Data\DATA.csv"'
-submission_path = 'C:\Users\ilkay\Documents\Cem-Berkan\submission.csv'
-sample_submission_path = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_sample_submission.csv"
-train_csv_path = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_train.csv"
+ckpt = r"C:\Users\ilkay\Documents\Cem-Berkan\checkpoint"
+checkpoint_path = r'C:\Users\ilkay\Documents\Cem-Berkan\checkpoint'
+model_dir = r"C:\Users\ilkay\Documents\Cem-Berkan\models\{date}.h5" 
+image_dir = r"C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_train"
+path = r"C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_test"
+data_path = r"C:\Users\ilkay\Documents\Cem-Berkan\Data\DATA.csv"
+submission_path = r'C:\Users\ilkay\Documents\Cem-Berkan\submission.csv'
+sample_submission_path = r"C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_sample_submission.csv"
+train_csv_path = r"C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_train.csv"
 
 
 params = {'dim':(224,224,3),
