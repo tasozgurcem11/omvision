@@ -16,6 +16,14 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.callbacks import ModelCheckpoint
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
+
+from preprocessing import *
+from dataloader import *
+from submission import *
+from metrics import *
+
+
+
 ckpt = r"C:\Users\ilkay\Documents\Cem-Berkan\checkpoint"
 checkpoint_path = r'C:\Users\ilkay\Documents\Cem-Berkan\checkpoint'
 model_dir = r"C:\Users\ilkay\Documents\Cem-Berkan\models\{date}.h5" 
@@ -35,12 +43,12 @@ params = {'dim':(224,224,3),
 epochs = 4
 # Generators
 
-df = preprocessing. get_dataframe(train_csv_path)#path is argument
+df = get_dataframe(train_csv_path)#path is argument
 
-partition,labels = preprocessing.get_partition_labels(df,frac = 1)
+partition,labels = get_partition_labels(df,frac = 1)
 
-training_generator = dataloader.DataGenerator(preprocessing.partition['train'], labels, **params)
-validation_generator = dataloader.DataGenerator(preprocessing.partition['validation'], labels, **params)
+training_generator = DataGenerator(preprocessing.partition['train'], labels, **params)
+validation_generator = DataGenerator(preprocessing.partition['validation'], labels, **params)
 
 
 # Design model

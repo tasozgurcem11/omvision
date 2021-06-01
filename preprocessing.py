@@ -86,8 +86,7 @@ import pydicom
 
 from tqdm import tqdm
 
-def get_dataframe(train_csv_path,data_path):
-    #path = '../input/rsna-intracranial-hemorrhage-detection/rsna-intracranial-hemorrhage-detection/stage_2_train.csv'
+def get_dataframe(train_csv_path):
     df1 = pd.read_csv(train_csv_path)
     df1["Image"] = df1["ID"].str.slice(stop=12)
     df1["Diagnosis"] = df1["ID"].str.slice(start=13)
@@ -105,7 +104,6 @@ def get_dataframe(train_csv_path,data_path):
     df1 = df1.pivot(index = 'Image', columns = 'Diagnosis', values = 'Label')
     DATA = []
     columns = ['PatientID','SOPInstanceUID','SeriesInstanceUID','StudyInstanceUID','z']
-    #path = '../input/rsna-intracranial-hemorrhage-detection/rsna-intracranial-hemorrhage-detection/stage_2_train/'
     
     for dcm in tqdm(df1.index):
         dicom = pydicom.dcmread(data_path +dcm+'.dcm')
