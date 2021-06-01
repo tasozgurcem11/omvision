@@ -1,6 +1,8 @@
 import numpy as np
 import pydicom
 from tqdm import trange
+from __init__ import *
+
 
 def get_partition_labels(df,frac = 0.25):
     partition = dict()
@@ -115,27 +117,6 @@ def get_dataframe(train_csv_path,data_path):
         DATA.append([PatientID,SOPInstanceUID,SeriesInstanceUID,StudyInstanceUID,z_value])
     new_df = pd.DataFrame(DATA,index = df1.index, columns = columns)
     overall = pd.concat([df1,new_df],axis = 1)
-    overall.to_csv('./DATA.csv')
+    overall.to_csv(data_path)
     return overall
 
-
-def get_good_slices():
-    df = pd.read_csv('../input/rsna-metadata/DATA.csv',index_col =None)
-    SeriesInstances = df.SeriesInstanceUID.unique()
-    new_df = pd.DataFrame(columns = df.columns)
-    for head in tqdm(SeriesInstances):
-        df_temp = df[df.SeriesInstanceUID == head]
-        df_temp = df_temp.sort_values(by = 'z')
-        length = len(df_temp)
-        if length < 23:
-            df_temp = df_temp.iloc[10:,:]
-        elif length < 31:
-            df_temp = df_temp.iloc[10:length-6,:]
-        elif length < 45:
-            df_temp = df_temp.iloc[15:length-6,:]
-        elif length < 70:
-            df_temp = df_temp.iloc[15:length-8,:]
-        new_df = new_df.append(df_temp,ignore_index = True)
-
-    new_df.to_csv('./good_slices.csv')
-    return new_df

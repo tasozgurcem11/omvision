@@ -16,6 +16,17 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.callbacks import ModelCheckpoint
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
+ckpt = "C:\Users\ilkay\Documents\Cem-Berkan\checkpoint"
+checkpoint_path = 'C:\Users\ilkay\Documents\Cem-Berkan\checkpoint'
+model_dir = "C:\Users\ilkay\Documents\Cem-Berkan\models\{date}.h5" 
+image_dir = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_train"
+path = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_test"
+data_path = '"C:\Users\ilkay\Documents\Cem-Berkan\Data\DATA.csv"'
+submission_path = 'C:\Users\ilkay\Documents\Cem-Berkan\submission.csv'
+sample_submission_path = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_sample_submission.csv"
+train_csv_path = "C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_train.csv"
+
+
 params = {'dim':(224,224,3),
          'batch_size':32,
          'n_classes':6,
@@ -24,7 +35,7 @@ params = {'dim':(224,224,3),
 epochs = 4
 # Generators
 
-df = preprocessing. get_dataframe()#path is argument
+df = preprocessing. get_dataframe(train_csv_path)#path is argument
 
 partition,labels = preprocessing.get_partition_labels(df,frac = 1)
 
@@ -44,7 +55,6 @@ model = Sequential([
     Dense(6,activation = 'sigmoid')
 ]) 
 
-ckpt = './checkpoint/cp.ckpt'
 
 my_callbacks = [
     ModelCheckpoint(filepath= ckpt, monitor = 'val_loss' ,save_best_only=True,save_weights_only=False,verbose = 1),
@@ -64,4 +74,4 @@ model.fit(training_generator,
 
 from datetime import date
 date = date.today
-model.save('./models/{date}.h5')
+model.save(model_dir)

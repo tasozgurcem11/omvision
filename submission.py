@@ -4,9 +4,10 @@ import tensorflow as tf
 import pandas as pd
 import metrics
 from tensorflow import keras
+from __init__ import *
 
 def get_test_dcms():
-    path = '../input/rsna-intracranial-hemorrhage-detection/rsna-intracranial-hemorrhage-detection/stage_2_sample_submission.csv'
+    path = sample_submission_path
     df1 = pd.read_csv(path)
     df1["Image"] = df1["ID"].str.slice(stop=12)
     df1["Diagnosis"] = df1["ID"].str.slice(start=13)
@@ -14,7 +15,7 @@ def get_test_dcms():
     df1 = df1.pivot(index = 'Image', columns = 'Diagnosis', values = 'Label')
     return list(df1.index)
 
-def get_pred(path = './checkpoint'):
+def get_pred(path = checkpoint_path):
     params = {'dim':(224,224,3),
          'batch_size':16,
          'n_classes':6,
@@ -32,10 +33,10 @@ def get_submission(preds):
     dcms = get_test_dcms()
     deneme = pd.DataFrame(preds, columns=[ 'epidural', 'intraparenchymal', 'intraventricular','subarachnoid', 'subdural','any'], index=dcms)
     values = deneme.stack().values
-    path = '../input/rsna-intracranial-hemorrhage-detection/rsna-intracranial-hemorrhage-detection/stage_2_sample_submission.csv'
+    path = sample_submission_path
     submission = pd.read_csv(path)
     submission.drop_duplicates()
     submission.Label = values
     #print(submission.head())
-    submission.to_csv('./submission.csv',index = None)
+    submission.to_csv(submission_path,index = None)
     return submission

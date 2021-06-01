@@ -1,7 +1,7 @@
 import numpy as np
 from tensorflow import  keras
 from preprocessing import _read
-
+from __init__ import *
 #Data loader specialized
 
 class DataGenerator(keras.utils.Sequence):
@@ -55,7 +55,7 @@ class DataGenerator(keras.utils.Sequence):
             # Generate data
             for i, ID in enumerate(list_IDs_temp):
                 # Store sample
-                image_dir = '../input/rsna-intracranial-hemorrhage-detection/rsna-intracranial-hemorrhage-detection/stage_2_train/'
+                image_dir = image_dir
                 X[i,] = _read(image_dir+ID+'.dcm',self.dim)
                 #print(X)
                 # Store class
@@ -65,7 +65,7 @@ class DataGenerator(keras.utils.Sequence):
         
         else: # test phase
             for i, ID in enumerate(list_IDs_temp):
-                path = '../input/rsna-intracranial-hemorrhage-detection/rsna-intracranial-hemorrhage-detection/stage_2_test/'
+                path = path
                 X[i,] = _read(path+ID+'.dcm',self.dim)
             
             return X
