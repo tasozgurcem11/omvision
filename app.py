@@ -25,6 +25,13 @@ import pydicom
 
 from tqdm import tqdm
 
+import tensorflow as tf 
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+
+physical_devices =  tf.config.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(physical_devices[0],True)
+
+
 ckpt = r"C:\Users\ilkay\Documents\Cem-Berkan\checkpoint"
 checkpoint_path = r'C:\Users\ilkay\Documents\Cem-Berkan\checkpoint'
 model_dir = r"C:\Users\ilkay\Documents\Cem-Berkan\models\{date}.h5" 
