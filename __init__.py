@@ -1,6 +1,3 @@
-import dataloader
-import metrics
-import preprocessing
 import os
 from keras.models import *
 from keras.layers import *
@@ -16,13 +13,10 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.callbacks import ModelCheckpoint
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-
 from preprocessing import *
 from dataloader import *
 from submission import *
 from metrics import *
-
-
 
 ckpt = r"C:\Users\ilkay\Documents\Cem-Berkan\checkpoint"
 checkpoint_path = r'C:\Users\ilkay\Documents\Cem-Berkan\checkpoint'

@@ -1,8 +1,6 @@
 import numpy as np
 from tensorflow import  keras
 from preprocessing import _read
-from __init__ import *
-#Data loader specialized
 
 class DataGenerator(keras.utils.Sequence):
     'Generates data for Keras'
