@@ -35,6 +35,8 @@ submission_path = r'C:\Users\ilkay\Documents\Cem-Berkan\submission.csv'
 sample_submission_path = r"C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_sample_submission.csv"
 train_csv_path = r"C:\Users\ilkay\Documents\Cem-Berkan\Data\stage_2_train.csv"
 
+print("Log1: Import successful")
+
 class DataGenerator(keras.utils.Sequence):
     'Generates data for Keras'
     def __init__(self, list_IDs, labels, batch_size=32, dim=(32,32,32), n_channels=1,n_classes=10, shuffle=True):
@@ -383,9 +385,13 @@ df = get_dataframe(train_csv_path)#path is argument
 
 partition,labels = get_partition_labels(df,frac = 1)
 
+print("Log2: Partition successful")
+
+
 training_generator = DataGenerator(preprocessing.partition['train'], labels, **params)
 validation_generator = DataGenerator(preprocessing.partition['validation'], labels, **params)
 
+print("Log3: DataGeneration successful")
 
 # Design model
 model = Sequential([
@@ -406,6 +412,8 @@ my_callbacks = [
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[metrics.weighted_loss,metrics.log_loss, keras.metrics.BinaryAccuracy(),tf.keras.metrics.AUC(num_thresholds=200, curve='ROC',summation_method='interpolation', multi_label=True, label_weights=[2, 1, 1, 1, 1, 1])])
 
+print("Log4: Model Compile successful")
+
 epochs = 20
 # Train model on dataset
 model.fit(training_generator,
@@ -414,6 +422,8 @@ model.fit(training_generator,
           workers = 2, 
           use_multiprocessing= True,
          callbacks = my_callbacks)
+
+print("Log5: Model Fit successful")
 
 
 from datetime import date
